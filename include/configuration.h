@@ -4,9 +4,15 @@
 namespace configuration {
     typedef unsigned char pin;
 
-    constexpr pin led = 2;
+    const pin led = 2;
 
-    constexpr pin relayOpen = 12;
-    constexpr pin relayClose = 13;
+    const pin relayOpen = 12;
+    const pin relayClose = 13;
+
+    const unsigned int serverPort = 50235;
+
+    const char* webpageTitle = "Arduino Garage Door";
+    const char* webpageButtonOpenText = "Open";
+    const char* webpageButtonCloseText = "Close";
 
 } // namespace configuration

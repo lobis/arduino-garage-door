@@ -2,6 +2,7 @@
 
 #include "configuration.h"
 #include "networking.h"
+#include "server.h"
 
 #include <Arduino.h>
 
@@ -11,12 +12,15 @@ void setup() {
     pinMode(configuration::led, OUTPUT);
     pinMode(configuration::relayOpen, OUTPUT);
     pinMode(configuration::relayClose, OUTPUT);
+
+    Serial.println("Start");
+    ConnectToWiFi();
+    Serial.println("Connected");
+    Serial.println(GetLocalIP());
+
+    server::start();
 }
 
 void loop() {
-    while (!IsConnectedToWiFi()) {
-        ConnectToWiFi();
-    }
-
-    Serial.print("HOLA\n");
+    while (!IsConnectedToWiFi()) { ConnectToWiFi(); }
 }

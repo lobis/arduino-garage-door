@@ -12,7 +12,7 @@ bool IsConnectedToWiFi() {
 void ConnectToWiFi() {
     digitalWrite(configuration::led, HIGH);
 
-    WiFi.begin(secrets::ssid, secrets::password);
+    WiFi.begin(secrets::ssid, secrets::ssidPassword);
 
     while (!IsConnectedToWiFi()) {
         delay(400);
@@ -22,4 +22,8 @@ void ConnectToWiFi() {
     }
 
     digitalWrite(configuration::led, LOW);
+}
+
+IPAddress GetLocalIP() {
+    return WiFi.localIP();
 }
