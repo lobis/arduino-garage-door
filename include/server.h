@@ -1,6 +1,7 @@
 #pragma once
 
 #include "configuration.h"
+#include "relay.h"
 #include "secrets.h"
 
 #include <AsyncTCP.h>
@@ -17,7 +18,6 @@ namespace server {
 )rawliteral";
 
     String processor(const String& var) {
-        // Serial.println(var);
         if (var == "TITLE") {
             return configuration::webpageTitle;
         }
@@ -44,7 +44,11 @@ namespace server {
 
             if (request->hasParam(inputParameter)) {
                 String inputMessage = request->getParam(inputParameter)->value();
-                Serial.println("parameter: " + inputMessage);
+                if (inputMessage == "open") {
+                    relay::OpenDoor();
+                } else if (inputMessage == "close") {
+                    relay::CloseDoor();
+                }
             }
 
             request->send_P(200, "text/html", index_html, processor);

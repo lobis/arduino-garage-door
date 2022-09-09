@@ -13,6 +13,9 @@ void setup() {
     pinMode(configuration::relayOpen, OUTPUT);
     pinMode(configuration::relayClose, OUTPUT);
 
+    digitalWrite(configuration::relayOpen, false);
+    digitalWrite(configuration::relayClose, false);
+
     Serial.println("Start");
     ConnectToWiFi();
     Serial.println("Connected");
@@ -22,5 +25,18 @@ void setup() {
 }
 
 void loop() {
-    while (!IsConnectedToWiFi()) { ConnectToWiFi(); }
+    while (!IsConnectedToWiFi()) {
+        ConnectToWiFi();
+    }
+
+    const bool stateOpen = digitalRead(configuration::relayOpen);
+    const bool stateClose = digitalRead(configuration::relayClose);
+
+    relay::UpdateIdle();
+
+    Serial.println(stateOpen);
+    Serial.println(stateClose);
+    Serial.println("---");
+
+    delay(100);
 }
