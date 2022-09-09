@@ -2,6 +2,7 @@
 
 #include "configuration.h"
 #include "networking.h"
+#include "relay.h"
 #include "server.h"
 
 #include <Arduino.h>
@@ -10,11 +11,12 @@ void setup() {
     Serial.begin(9600);
 
     pinMode(configuration::led, OUTPUT);
+
     pinMode(configuration::relayOpen, OUTPUT);
     pinMode(configuration::relayClose, OUTPUT);
 
-    digitalWrite(configuration::relayOpen, false);
-    digitalWrite(configuration::relayClose, false);
+    digitalWrite(configuration::relayOpen, relay::stateOff);
+    digitalWrite(configuration::relayClose, relay::stateOff);
 
     Serial.println("Start");
     ConnectToWiFi();

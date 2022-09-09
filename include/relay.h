@@ -11,32 +11,35 @@ namespace relay {
 
     unsigned long startTime = millis();
 
+    const unsigned char stateOff = HIGH;
+    const unsigned char stateOn = LOW;
+
     void OpenDoor() {
-        digitalWrite(configuration::relayClose, false);
-        digitalWrite(configuration::relayOpen, false);
+        digitalWrite(configuration::relayClose, stateOff);
+        digitalWrite(configuration::relayOpen, stateOff);
         delay(200);
 
         startTime = millis();
 
-        digitalWrite(configuration::relayOpen, true);
+        digitalWrite(configuration::relayOpen, stateOn);
     }
 
     void CloseDoor() {
-        digitalWrite(configuration::relayClose, false);
-        digitalWrite(configuration::relayOpen, false);
+        digitalWrite(configuration::relayClose, stateOff);
+        digitalWrite(configuration::relayOpen, stateOff);
         delay(200);
 
         startTime = millis();
 
-        digitalWrite(configuration::relayClose, true);
+        digitalWrite(configuration::relayClose, stateOn);
     }
 
     void UpdateIdle() {
         unsigned long elapsedTime = millis() - startTime;
         if (elapsedTime > configuration::relayIdleDelayMillis) {
             startTime = millis();
-            digitalWrite(configuration::relayClose, false);
-            digitalWrite(configuration::relayOpen, false);
+            digitalWrite(configuration::relayClose, stateOff);
+            digitalWrite(configuration::relayOpen, stateOff);
         }
     }
 
