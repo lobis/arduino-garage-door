@@ -6,10 +6,10 @@ namespace configuration {
 
     const pin led = 2;
 
-    const pin relayOpen = 12;
-    const pin relayClose = 13;
+    const pin relayOpen = 18;
+    const pin relayClose = 19;
 
-    const unsigned long relayIdleDelayMillis = 3000;
+    const unsigned long relayIdleDelayMillis = 30000;
 
     const unsigned int serverPort = 50235;
 

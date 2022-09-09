@@ -14,7 +14,7 @@ namespace server {
     const char* inputParameter = "door";
 
     const char index_html[] PROGMEM = R"rawliteral(
-<!DOCTYPE HTML><html><head> <title>%TITLE%</title> <meta name="viewport" content="width=device-width, initial-scale=1"> <style>html{font-family: sans-serif; display: inline-block; text-align: center;}</style></head><body> <h2>%TITLE%</h2> <button onclick="doorUpdate('open')">%BUTTON_OPEN_TEXT%</button> <button onclick="doorUpdate('close')">%BUTTON_CLOSE_TEXT%</button> <script>function doorUpdate(state){if (state !="close" && state !="open"){return;}console.log(state); var xhr=new XMLHttpRequest(); xhr.open("GET", "/update?door=" + state, true); xhr.send();}</script></body></html>
+<!DOCTYPE HTML><html><head> <title>%TITLE%</title> <meta name="viewport" content="width=device-width, initial-scale=1"> <style>html{font-family: sans-serif; display: inline-block; text-align: center;}</style></head><body> <h2>%TITLE%</h2> <button onclick="doorUpdate('open')">%BUTTON_OPEN_TEXT%</button> <button onclick="doorUpdate('close')">%BUTTON_CLOSE_TEXT%</button> <button onclick="doorUpdate('stop')">%BUTTON_STOP_TEXT%</button> <script>function doorUpdate(state){if (state !="close" && state !="open" && state !="stop"){return;}var xhr=new XMLHttpRequest(); xhr.open("GET", "/update?door=" + state, true); xhr.send();}</script></body></html>
 )rawliteral";
 
     String processor(const String& var) {
@@ -26,6 +26,9 @@ namespace server {
         }
         if (var == "BUTTON_CLOSE_TEXT") {
             return configuration::webpageButtonCloseText;
+        }
+        if (var == "BUTTON_STOP_TEXT") {
+            return "STOP";
         }
         return {};
     }
@@ -48,6 +51,8 @@ namespace server {
                     relay::OpenDoor();
                 } else if (inputMessage == "close") {
                     relay::CloseDoor();
+                } else if (inputMessage == "stop") {
+                    relay::Stop();
                 }
             }
 

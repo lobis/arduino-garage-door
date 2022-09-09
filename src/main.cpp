@@ -22,6 +22,7 @@ void setup() {
     ConnectToWiFi();
     Serial.println("Connected");
     Serial.println(GetLocalIP());
+    Serial.println(WiFi.macAddress());
 
     server::start();
 }
@@ -35,10 +36,6 @@ void loop() {
     const bool stateClose = digitalRead(configuration::relayClose);
 
     relay::UpdateIdle();
-
-    Serial.println(stateOpen);
-    Serial.println(stateClose);
-    Serial.println("---");
 
     delay(100);
 }

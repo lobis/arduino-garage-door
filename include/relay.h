@@ -43,4 +43,11 @@ namespace relay {
         }
     }
 
+    void Stop(){
+        startTime = millis();
+        digitalWrite(configuration::relayClose, stateOff);
+        digitalWrite(configuration::relayOpen, stateOff);
+        delay(200);
+    }
+
 } // namespace actuator
